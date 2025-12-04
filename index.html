@@ -1,158 +1,155 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>KanyeStudio Pro</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KanyeStudio Pro</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0;
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      background: #111;
+      color: #fff;
+    }
+    h2 { color: #ff00ff; margin: 0 0 0.5em 0; }
+    h3 { color: #ccc; margin: 1.5em 0 0.5em 0; }
+    a { color: #ff00ff; }
 
+    .midi-note {
+      background: #222;
+      padding: 1em;
+      border-radius: 4px;
+      margin-bottom: 1em;
+      font-size: 0.9em;
+      color: #888;
+    }
 
-<style type="text/css" media="screen">
-	.clear { clear: both; }
+    .instrumentals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1em;
+    }
+    .midi-btn {
+      background: #333;
+      color: #fff;
+      border: 2px solid #ff00ff;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .midi-btn:hover, .midi-btn.active {
+      background: #ff00ff;
+      color: #fff;
+    }
+    .midi-download {
+      display: block;
+      margin-top: 0.5em;
+      font-size: 0.85em;
+      color: #888;
+    }
 
-	body { font-size: 20pt; }
+    #scratchpad {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    #scratchpad li { display: inline; }
+    #scratchpad a {
+      display: inline-block;
+      padding: 15px 25px;
+      background: #ff00ff;
+      color: white;
+      text-decoration: none;
+      font-family: monospace;
+      font-size: 1.2em;
+      border-radius: 4px;
+      transition: transform 0.1s, background 0.1s;
+      user-select: none;
+    }
+    #scratchpad a:hover {
+      background: #cc00cc;
+    }
+    #scratchpad a:active {
+      transform: scale(0.95);
+      background: #aa00aa;
+    }
 
-	#scratchpad ul { list-style: none; }
-	#scratchpad li { display: inline; float: left; margin-right: 5px; }
-	#scratchpad li a { padding: 5px 10px; background-color: #ff00ff; color: white; border: 1px solid #eee; text-decoration: none; font-family: "geneva", sans-serif; }
-</style>
-
-
+    .footer {
+      margin-top: 3em;
+      padding-top: 1em;
+      border-top: 1px solid #333;
+      font-size: 0.85em;
+      color: #666;
+    }
+    .footer a { color: #888; }
+  </style>
 </head>
+<body>
 
-<body id="lolwut">
+<h2>KANYESTUDIO PRO</h2>
 
+<h3>INSTRUMENTALS (MIDI)</h3>
 
-<!-- FAT LAB RADIO -->
-<!-- KANYE WEEK EDITION -->
+<div class="midi-note">
+  MIDI files don't play natively in modern browsers. Download them and use a MIDI player or DAW.
+</div>
 
-<!-- <script src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" charset="utf-8">
-  google.load("jquery", "1");
-	//   google.setOnLoadCallback(function() {
-	//     $.getJSON("http://ajax.googleapis.com/ajax/services/search/web?q=google&v=1.0&callback=?");
-	// });
-</script> -->
+<div class="instrumentals">
+  <a class="midi-btn" href="midi/get-em-high.mid" download>Get 'Em High</a>
+  <a class="midi-btn" href="midi/golddigger.mid" download>Gold Digger</a>
+  <a class="midi-btn" href="midi/jesuswalks_kanyewest.mid" download>Jesus Walks</a>
+  <a class="midi-btn" href="midi/21530_All-Falls-Down.mid" download>All Falls Down</a>
+  <a class="midi-btn" href="midi/throughthewire.mid" download>Through The Wire</a>
+  <a class="midi-btn" href="midi/love-lockdown(2).mid" download>Love Lockdown</a>
+</div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="jquery.sound.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- <link type="text/css" href="http://jqueryui.com/latest/themes/base/jquery.ui.all.css" rel="stylesheet" /> -->
-<!-- <script type="text/javascript" src="http://jqueryui.com/latest/ui/jquery.ui.core.js"></script> -->
-<!-- <script type="text/javascript" src="http://jqueryui.com/latest/ui/jquery.ui.widget.js"></script> -->
-<!-- <script type="text/javascript" src="http://jqueryui.com/latest/ui/jquery.ui.tabs.js"></script> -->
-<script type="text/javascript" src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-
-	// midiz
-  	$('#jukebox').tabs({ selected: 0, fx: { opacity: 'toggle' }});
-
-	// scratchez
-	$("a[href$=.mp3]").click(function() {
-		$.sound.play(this.href);
-		return false;
-	});
-
-	$("#all-at-once").click(function() {
-		$("a[href$=.mp3]").each(function() {
-			$.sound.play(this.href);
-		});
-	});
-	$("#all-at-once-track").click(function() {
-		$("a[href$=.mp3]").each(function() {
-			$.sound.play(this.href, {
-				track: "at-once" + this.href
-			});
-		});
-	});
-	$("#toggle").click(function() {
-		$.sound.enabled = !$.sound.enabled;
-		$(this).text( $.sound.enabled ? "Disable Sounds" : "Enable Sounds" );
-	})
-
-
-});
-</script>
-
-
-
-
-
-<h2>
-  <img src="http://1a.img.v4.skyrock.net/1ab/focus383/pics/1952203343_1.gif" height="16" />
-
-  KANYESTUDIO PRO
-</h2>
-
-<h3>INSTRUMENTALS</h3>
-<div id="jukebox">
-	<ul>
-		<li><a href="#song-0"><span>0</span></a></li>
-		<li><a href="#song-1"><span>1</span></a></li>
-		<li><a href="#song-2"><span>2</span></a></li>
-		<li><a href="#song-3"><span>3</span></a></li>
-		<li><a href="#song-4"><span>4</span></a></li>
-		<li><a href="#song-5"><span>5</span></a></li>
-	</ul>
-
-	<div id="song-0">
-	  <strong><em>Get 'Em High (On Midi)</em></strong>
-		<p><a href="midi/get-em-high.mid">get-em-high.mid</a></p>
-	  <embed src="midi/get-em-high.mid" autostart="false" width="200" height="60" loop="true" />
-	</div>
-	<div id="song-1" style="display: none;">
-	  <strong><em>Midigold Digger</em></strong>
-		<p><a href="midi/golddigger.mid">golddigger.mid</a></p>
-	  <embed src="midi/golddigger.mid" autostart="false" width="200" height="60" loop="true" />
-	</div>
-	<div id="song-2" style="display: none;">
-	  <strong><em>Jesus Midiwalks</em></strong>
-		<p><a href="midi/jesuswalks_kanyewest.mid">jesuswalks_kanyewest.mid</a></p>
-	  <embed src="midi/jesuswalks_kanyewest.mid" autostart="false" width="200" height="60" loop="true" />
-	</div>
-	<div id="song-3" style="display: none;">
-	  <strong><em>All Midi Falls Down</em></strong>
-		<p><a href="midi/21530_All-Falls-Down.mid">21530_All-Falls-Down.mid</a></p>
-	  <embed src="midi/21530_All-Falls-Down.mid" autostart="false" width="200" height="60" loop="true" />
-	 </div>
-	<div id="song-4" style="display: none;">
-	  <strong><em>Through The Midi Wire</em></strong>
-		<p><a href="midi/throughthewire.mid">throughthewire.mid</a></p>
-	  <embed src="midi/throughthewire.mid" autostart="false" loop="true" width="200" height="60">
-	</div>
-	<div id="song-5" style="display: none;">
-	  <strong><em>Midi Lockdown</em></strong>
-		<p><a href="midi/love-lockdown(2).mid">love-lockdown(2).mid</a></p>
-	  <embed src="midi/love-lockdown(2).mid" autostart="false" width="200" height="60" loop="true" />
-	</div>
-</div> <!-- #juekbox -->
-
-
-
-<br /><br />
 <h3>SCRATCHES by DJ A-TRAK</h3>
-
+<p style="color: #888; font-size: 0.9em;">Click to play</p>
 
 <ul id="scratchpad">
-	<!--<li><a href="scratches/000-rub.mp3">Rub</a></li>
-	<li><a href="scratches/002-crab.mp3">Crab</a></li>
-	<li><a href="scratches/001-flare.mp3">Flare</a></li>
-	<li><a href="scratches/003-crab.mp3">Crab</a></li>
-	<li><a href="scratches/005-rub.mp3">Rub</a></li>
-	<li><a href="scratches/006-scribble.mp3">Transform</a></li>-->
-
-	<li><a href="scratches/000-rub.mp3">1</a></li>
-	<li><a href="scratches/002-crab.mp3">2</a></li>
-	<li><a href="scratches/001-flare.mp3">3</a></li>
-	<li><a href="scratches/003-crab.mp3">4</a></li>
-	<li><a href="scratches/005-rub.mp3">5</a></li>
-	<li><a href="scratches/006-scribble.mp3">6</a></li>
+  <li><a href="scratches/000-rub.mp3" data-sound>1</a></li>
+  <li><a href="scratches/002-crab.mp3" data-sound>2</a></li>
+  <li><a href="scratches/001-flare.mp3" data-sound>3</a></li>
+  <li><a href="scratches/003-crab.mp3" data-sound>4</a></li>
+  <li><a href="scratches/005-rub.mp3" data-sound>5</a></li>
+  <li><a href="scratches/006-scribble.mp3" data-sound>6</a></li>
 </ul>
 
-<!-- <p class="clear"><br />
-<button id="all-at-once">All at once, parallel</button>
-<button id="all-at-once-track">All at once, same track</button>
-</p> -->
+<div class="footer">
+  <p>A <a href="http://fffff.at">FAT Lab</a> Production / Kanye Week 2009</p>
+  <p><a href="/">jamiedubs.com</a></p>
+</div>
+
+<script>
+// Preload and cache audio
+const audioCache = {};
+
+document.querySelectorAll('[data-sound]').forEach(link => {
+  // Preload
+  const audio = new Audio(link.href);
+  audio.preload = 'auto';
+  audioCache[link.href] = audio;
+
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Clone the audio to allow overlapping plays
+    const sound = audioCache[this.href].cloneNode();
+    sound.play();
+  });
+});
+</script>
 
 </body>
 </html>
